@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SauceDemoMavenQA-master/SauceDemoMaven.iml" filepath="$PROJECT_DIR$/SauceDemoMavenQA-master/SauceDemoMaven.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SauceDemoMavenQA-master.iml" filepath="$PROJECT_DIR$/.idea/SauceDemoMavenQA-master.iml" />
+    </modules>
+  </component>
+</project>
