@@ -73,7 +73,7 @@ public class ProductsPage {
         }
     }
 
-    public void sortByValue(String sortValue) {
+    public void sortByValue (String sortValue) {
         WebElement sortContainer = driver.findElement(By.xpath("//select[@data-test='product_sort_container']"));
 
         sortContainer.click();
