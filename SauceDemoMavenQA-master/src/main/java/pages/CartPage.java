@@ -102,6 +102,24 @@ public class CartPage {
        return sum + taxDouble;
     }
 
+    public String getNameProductInCart() {
+        WebElement NameProductInCart = driver.findElement(By.className("inventory_item_name"));
+        String NameProductInCartText = NameProductInCart.getText();
+        return NameProductInCartText;
+    }
+
+    public String getDescriptionProductInCart() {
+        WebElement DescriptionProductInCart = driver.findElement(By.className("inventory_item_desc"));
+        String DescriptionProductInCartText = DescriptionProductInCart.getText();
+        return DescriptionProductInCartText;
+    }
+
+    public Double getPriceProductInCart() {
+        WebElement PriceProductInCart = driver.findElement(By.className("inventory_item_price"));
+        String PriceProductInCartText = PriceProductInCart.getText();
+        return Double.parseDouble(PriceProductInCartText.substring(1));
+    }
+
 
 
     public void close() {

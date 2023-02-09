@@ -1,5 +1,7 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -179,7 +181,7 @@ public class ProductsTests {
     }
 
     @Test
-    public void verifyTotalProduct() {
+    public void verifyTotalPriceProduct() {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
 
@@ -204,6 +206,47 @@ public class ProductsTests {
         System.out.println("Total sum count in CartPage by QA:  " + cartPage.sumTotalCount());
 
         Assert.assertEquals( cartPage.getTotalCount(), cartPage.sumTotalCount(), "Product count is not equals");
+
+        cartPage.close();
+    }
+    @Test
+    public void verifyProductDescription() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openPage();
+        loginPage.setUserName("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.addProductToCartByName("Sauce Labs Backpack");
+        productsPage.openCart();
+        CartPage cartPage = new CartPage(driver);
+
+        cartPage.getNameProductInCart();
+        System.out.println("Product Name: " + cartPage.getNameProductInCart());
+
+        Assert.assertEquals( "Sauce Labs Backpack", cartPage.getNameProductInCart(), "Product name is not equals");
+
+        cartPage.getDescriptionProductInCart();
+        System.out.println("Product Description: " + cartPage.getDescriptionProductInCart());
+
+        WebElement DescriptionProductInCart = driver.findElement(By.className("inventory_item_desc"));
+        String DescriptionProductInCartText = DescriptionProductInCart.getText();
+
+        Assert.assertEquals( DescriptionProductInCartText, cartPage.getDescriptionProductInCart(), "Product name is not equals");
+
+        cartPage.getPriceProductInCart();
+        System.out.println("Product Price: $" + cartPage.getPriceProductInCart());
+
+        WebElement PriceProductInCart = driver.findElement(By.className("inventory_item_price"));
+        String PriceProductInCartText = PriceProductInCart.getText();
+        Double PriceDoubleProductInCartText = Double.parseDouble(PriceProductInCartText.substring(1));
+
+        Assert.assertEquals( PriceDoubleProductInCartText, cartPage.getPriceProductInCart(), "Product name is not equals");
+
 
         cartPage.close();
     }
