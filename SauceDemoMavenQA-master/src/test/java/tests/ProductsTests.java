@@ -129,7 +129,7 @@ public class ProductsTests {
 
 
     @Test
-    public void verifySortProduct() {
+    public void verifySortProductByPrice() {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
 
@@ -155,6 +155,27 @@ public class ProductsTests {
 
         productsPage.close();
 
+    }
+
+    @Test
+    public void verifySortProductByName() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openPage();
+        loginPage.setUserName("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.sortByName( "Name (A to Z)");
+        productsPage.printProductName();
+        boolean isSortedByNameAZ = productsPage.isProductSortFromAZ();
+
+        Assert.assertEquals(isSortedByNameAZ, true, "Products are not sorted as expected, from high to low by price");
+
+        productsPage.close();
     }
 
     @Test

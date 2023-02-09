@@ -60,6 +60,17 @@ public class ProductsPage {
         }
     }
 
+    public void printProductName() {
+        WebElement container = driver.findElement(By.id("inventory_container"));
+
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+
+        for(int i = 0; i < listInventoryItems.size(); i++) {
+            WebElement itemName = listInventoryItems.get(i).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            System.out.println(itemName.getText());
+        }
+    }
+
     public Integer productCountInCart() {
         //WebElement cartNumber = driver.findElement(By.xpath("//span[@class='shopping_cart_badge']"));
         //return Integer.parseInt(cartNumber.getText());
@@ -89,6 +100,22 @@ public class ProductsPage {
         }
     }
 
+    public void sortByName (String sortByName) {
+        WebElement sortContainer = driver.findElement(By.xpath("//select[@data-test='product_sort_container']"));
+
+        sortContainer.click();
+
+        List<WebElement> options = sortContainer.findElements(By.xpath(".//option"));
+
+        for(int i = 0; i < options.size(); i++) {
+            String optionText = options.get(i).getText();
+            if(optionText.equals(sortByName)) {
+                options.get(i).click();
+                break;
+            }
+        }
+    }
+
     public boolean isProductSortFromHighToLowByPrice() {
         boolean toReturn = true;
 
@@ -105,6 +132,31 @@ public class ProductsPage {
             String itemPriceSecondText = itemPriceSecond.getText();
             Double itemPriceSecondNumber = Double.parseDouble(itemPriceSecondText.substring(1));
             if(itemPriceFirstNumber < itemPriceSecondNumber) {
+                toReturn = false;
+                break;
+            }
+        }
+
+        return toReturn;
+    }
+
+    public boolean isProductSortFromAZ() {
+        boolean toReturn = true;
+
+        WebElement container = driver.findElement(By.id("inventory_container"));
+
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+       // System.out.println(listInventoryItems.size());
+        for(int i = 0; i < listInventoryItems.size() - 1; i++) {
+            WebElement itemName01 = listInventoryItems.get(0).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            String itemNameText01 = itemName01.getText();
+            System.out.println(itemNameText01);
+
+            WebElement itemName02 = listInventoryItems.get(4).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            String itemNameText02 = itemName02.getText();
+            System.out.println(itemNameText02);
+
+            if(itemNameText01 == "Sauce Labs Backpack" && itemNameText02 == "Sauce Labs Onesie") {
                 toReturn = false;
                 break;
             }
