@@ -194,6 +194,11 @@ public class ProductsTests {
         ProductsPage productsPage = new ProductsPage(driver);
         productsPage.addProductToCartByName("Sauce Labs Backpack");
         productsPage.addProductToCartByName("Sauce Labs Bike Light");
+        productsPage.addProductToCartByName("Sauce Labs Fleece Jacket");
+        productsPage.addProductToCartByName("Sauce Labs Onesie");
+        productsPage.addProductToCartByName("Sauce Labs Bolt T-Shirt");
+        productsPage.addProductToCartByName("Test.allTheThings() T-Shirt (Red)");
+
         productsPage.openCart();
         CartPage cartPage = new CartPage(driver);
         cartPage.clickCheckout();
@@ -202,6 +207,8 @@ public class ProductsTests {
         cartPage.setZip("11000");
         cartPage.clickContinue();
 
+        System.out.println("Number of items in Cart:             " + productsPage.productCountInCart());
+        System.out.println("**************************************************************************");
         System.out.println("Total sum count in CartPage by APP: $" + cartPage.getTotalCount());
         System.out.println("Total sum count in CartPage by QA:  $" + cartPage.sumTotalCount());
 
