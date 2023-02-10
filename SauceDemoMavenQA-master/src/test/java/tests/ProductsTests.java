@@ -175,7 +175,7 @@ public class ProductsTests {
         productsPage.printProductName();
         boolean isSortedByNameAZ = productsPage.isProductSortFromAZ();
 
-        Assert.assertEquals(isSortedByNameAZ, true, "Products are not sorted as expected, from high to low by price");
+        Assert.assertEquals(isSortedByNameAZ, true, "Products are not sorted as expected, from Name (A to Z)");
 
         productsPage.close();
     }
@@ -202,8 +202,8 @@ public class ProductsTests {
         cartPage.setZip("11000");
         cartPage.clickContinue();
 
-        System.out.println("Total sum count in CartPage by APP: " + cartPage.getTotalCount());
-        System.out.println("Total sum count in CartPage by QA:  " + cartPage.sumTotalCount());
+        System.out.println("Total sum count in CartPage by APP: $" + cartPage.getTotalCount());
+        System.out.println("Total sum count in CartPage by QA:  $" + cartPage.sumTotalCount());
 
         Assert.assertEquals( cartPage.getTotalCount(), cartPage.sumTotalCount(), "Product count is not equals");
 
