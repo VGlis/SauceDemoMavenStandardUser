@@ -249,8 +249,8 @@ public class ProductsTests {
 
 
         Assert.assertEquals(NameProductInCartText, NameProductInProductText, "Product Name is not equals");
-        Assert.assertEquals(DescriptionProductInProductText, DescriptionProductInCartText, "Product Name is not equals");
-        Assert.assertEquals(getPriceProductInProduct, getPriceProductInCart, "Product Name is not equals");
+        Assert.assertEquals(DescriptionProductInProductText, DescriptionProductInCartText, "Product Description is not equals");
+        Assert.assertEquals(getPriceProductInProduct, getPriceProductInCart, "Product Price is not equals");
 
 
         cartPage.close();
