@@ -179,5 +179,32 @@ public class ProductsPage {
         return Integer.parseInt(cart.findElement(By.xpath(".//span")).getText());
     }
 
+    public String getNameProductInProduct() {
+        WebElement NameProductInProduct = driver.findElement(By.xpath("//*[@id='inventory_item_container']/div/div/div[2]/div[1]"));
+        String NameProductInProductText = NameProductInProduct.getText();
+        return NameProductInProductText;
+    }
+
+    public String getDescriptionProductInProduct() {
+        WebElement DescriptionProductInProduct = driver.findElement(By.xpath("//*[@id='inventory_item_container']/div/div/div[2]/div[2]"));
+        String DescriptionProductInProductText = DescriptionProductInProduct.getText();
+        return DescriptionProductInProductText;
+    }
+
+    public Double getPriceProductInProduct() {
+        WebElement PriceProductInProduct = driver.findElement(By.xpath("//*[@id='inventory_item_container']/div/div/div[2]/div[3]"));
+        String PriceProductInProductText = PriceProductInProduct.getText();
+        return Double.parseDouble(PriceProductInProductText.substring(1));
+    }
+
+    public WebElement getButtonCartFromSingleProduct() {
+        return driver.findElement(By.xpath("//*[@id='add-to-cart-sauce-labs-backpack']"));
+    }
+
+    public void clickAddCartFromSingleProduct() {
+        getButtonCartFromSingleProduct().click();
+
+    }
+
 
 }

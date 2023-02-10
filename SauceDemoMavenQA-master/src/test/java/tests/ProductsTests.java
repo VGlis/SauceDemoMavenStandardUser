@@ -220,32 +220,37 @@ public class ProductsTests {
         loginPage.setPassword("secret_sauce");
         loginPage.clickLogin();
 
+        loginPage.clickProductLinkTextSauceLabsBackpack();
+
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addProductToCartByName("Sauce Labs Backpack");
+
+        String NameProductInProductText = productsPage.getNameProductInProduct();
+        String DescriptionProductInProductText = productsPage.getDescriptionProductInProduct();
+        Double getPriceProductInProduct = productsPage.getPriceProductInProduct();
+
+        System.out.println("Name of Product in Single Item:         " + NameProductInProductText);
+        System.out.println("Description of Product in Single Item:  " + DescriptionProductInProductText);
+        System.out.println("Price of Product in Single Item:        $" + getPriceProductInProduct);
+
+        productsPage.clickAddCartFromSingleProduct();
         productsPage.openCart();
+
         CartPage cartPage = new CartPage(driver);
 
-        cartPage.getNameProductInCart();
-        System.out.println("Product Name: " + cartPage.getNameProductInCart());
+        System.out.println("***************************************************************************************");
 
-        Assert.assertEquals( "Sauce Labs Backpack", cartPage.getNameProductInCart(), "Product name is not equals");
+        String NameProductInCartText = cartPage.getNameProductInCart();
+        String DescriptionProductInCartText = cartPage.getDescriptionProductInCart();
+        Double getPriceProductInCart = cartPage.getPriceProductInCart();
 
-        cartPage.getDescriptionProductInCart();
-        System.out.println("Product Description: " + cartPage.getDescriptionProductInCart());
+        System.out.println("Name of single Product in Cart Page:         " + NameProductInProductText);
+        System.out.println("Description of single Product in Cart Page:  " + DescriptionProductInProductText);
+        System.out.println("Price of single Product in Cart Page:        $" + getPriceProductInCart);
 
-        WebElement DescriptionProductInCart = driver.findElement(By.className("inventory_item_desc"));
-        String DescriptionProductInCartText = DescriptionProductInCart.getText();
 
-        Assert.assertEquals( DescriptionProductInCartText, cartPage.getDescriptionProductInCart(), "Product name is not equals");
-
-        cartPage.getPriceProductInCart();
-        System.out.println("Product Price: $" + cartPage.getPriceProductInCart());
-
-        WebElement PriceProductInCart = driver.findElement(By.className("inventory_item_price"));
-        String PriceProductInCartText = PriceProductInCart.getText();
-        Double PriceDoubleProductInCartText = Double.parseDouble(PriceProductInCartText.substring(1));
-
-        Assert.assertEquals( PriceDoubleProductInCartText, cartPage.getPriceProductInCart(), "Product name is not equals");
+        Assert.assertEquals(NameProductInCartText, NameProductInProductText, "Product Name is not equals");
+        Assert.assertEquals(DescriptionProductInProductText, DescriptionProductInCartText, "Product Name is not equals");
+        Assert.assertEquals(getPriceProductInProduct, getPriceProductInCart, "Product Name is not equals");
 
 
         cartPage.close();

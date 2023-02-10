@@ -42,6 +42,11 @@ public class LoginPage {
         //buttonLogin().click();
     }
 
+    public void clickProductLinkTextSauceLabsBackpack() {
+        driver.findElement(By.linkText("Sauce Labs Backpack")).click();
+        //buttonLogin().click();
+    }
+
     public void close() {
         driver.close();
         driver.quit();
