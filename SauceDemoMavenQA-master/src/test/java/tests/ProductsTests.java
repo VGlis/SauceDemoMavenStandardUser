@@ -284,4 +284,39 @@ public class ProductsTests {
         cartPage.close();
     }
 
+    @Test
+    public void verifyFinishOrder() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openPage();
+        loginPage.setUserName("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.addProductToCartByName("Sauce Labs Backpack");
+        productsPage.addProductToCartByName("Sauce Labs Bike Light");
+        productsPage.addProductToCartByName("Sauce Labs Fleece Jacket");
+        productsPage.addProductToCartByName("Sauce Labs Onesie");
+        productsPage.addProductToCartByName("Sauce Labs Bolt T-Shirt");
+        productsPage.addProductToCartByName("Test.allTheThings() T-Shirt (Red)");
+
+        productsPage.openCart();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.clickCheckout();
+        cartPage.setFirstName("Vladan");
+        cartPage.setLastName("Glisovic");
+        cartPage.setZip("11000");
+        cartPage.clickContinue();
+        cartPage.clickFinish();
+
+        System.out.println("Finish message:        " + cartPage.finishCart());
+
+        Assert.assertEquals( cartPage.finishCart(), "THANK YOU FOR YOUR ORDER", "Finish message is not equals");
+
+        cartPage.close();
+    }
+
 }

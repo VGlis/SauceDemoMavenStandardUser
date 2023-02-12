@@ -120,6 +120,20 @@ public class CartPage {
         return Double.parseDouble(PriceProductInCartText.substring(1));
     }
 
+    public String finishCart() {
+        WebElement DescriptionFinishCart = driver.findElement(By.className("complete-header"));
+        String DescriptionFinishCartText = DescriptionFinishCart.getText();
+        return DescriptionFinishCartText;
+    }
+
+    public WebElement getFinish() {
+        return driver.findElement(By.id("finish"));
+    }
+
+    public void clickFinish() {
+        getFinish().click();
+    }
+
 
 
 
