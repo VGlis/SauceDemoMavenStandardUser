@@ -160,7 +160,7 @@ public class ProductsTests {
     }
 
     @Test
-    public void verifySortProductByName() {
+    public void verifySortProductByNameAZ() {
         System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
 
@@ -176,6 +176,27 @@ public class ProductsTests {
         boolean isSortedByNameAZ = productsPage.isProductSortFromAZ();
 
         Assert.assertEquals(isSortedByNameAZ, true, "Products are not sorted as expected, from Name (A to Z)");
+
+        productsPage.close();
+    }
+
+    @Test
+    public void verifySortProductByNameZA() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\Vladan\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.openPage();
+        loginPage.setUserName("standard_user");
+        loginPage.setPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        ProductsPage productsPage = new ProductsPage(driver);
+        productsPage.sortByName( "Name (Z to A)");
+        productsPage.printProductName();
+        boolean isProductSortFromZA = productsPage.isProductSortFromZA();
+
+        Assert.assertEquals(isProductSortFromZA, true, "Products are not sorted as expected, from Name (A to Z)");
 
         productsPage.close();
     }

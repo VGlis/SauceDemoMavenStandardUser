@@ -165,6 +165,31 @@ public class ProductsPage {
         return toReturn;
     }
 
+    public boolean isProductSortFromZA() {
+        boolean toReturn = true;
+
+        WebElement container = driver.findElement(By.id("inventory_container"));
+
+        List<WebElement> listInventoryItems = container.findElements(By.xpath(".//div[@class='inventory_item']"));
+        // System.out.println(listInventoryItems.size());
+        for(int i = 0; i < listInventoryItems.size(); i++) {
+            WebElement itemName01 = listInventoryItems.get(0).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            String itemNameText01 = itemName01.getText();
+            System.out.println(itemNameText01);
+
+            WebElement itemName02 = listInventoryItems.get(5).findElement(By.xpath(".//div[@class='inventory_item_name']"));
+            String itemNameText02 = itemName02.getText();
+            System.out.println(itemNameText02);
+
+            if(itemNameText01 == "Test.allTheThings() T-Shirt (Red)" && itemNameText02 == "Sauce Labs Backpack") {
+                toReturn = true;
+                break;
+            }
+        }
+
+        return toReturn;
+    }
+
     public WebElement getCart() {
         return driver.findElement(By.xpath("//a[@class='shopping_cart_link']"));
     }
