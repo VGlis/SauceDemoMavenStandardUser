@@ -157,7 +157,7 @@ public class ProductsPage {
             System.out.println(itemNameText02);
 
             if(itemNameText01 == "Sauce Labs Backpack" && itemNameText02 == "Sauce Labs Onesie") {
-                toReturn = false;
+                toReturn = true;
                 break;
             }
         }
